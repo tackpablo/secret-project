@@ -31,7 +31,16 @@ class Car(models.Model):
     model = models.CharField(max_length=255)
     type = models.CharField(choices=CAR_TYPE)
 
-
+class Driver(models.Model):
+    """Model representing a driver"""
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    car_id = models.ForeignKey(Car, on_delete=models.CASCADE)
+    background_check = models.CharField(max_length=255)
+    profile_photo = models.CharField(max_length=255)
+    driver_license = models.CharField(max_length=255)
+    vehicle_insurance = models.CharField(max_length=255)
+    vehicle_registration = models.CharField(max_length=255)
+    joined_date = models.DateTimeField()
 
     
 
