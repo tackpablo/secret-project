@@ -69,7 +69,15 @@ class Trip(models.Model):
     trip_wait_time = models.DateTimeField()
     price = models.DecimalField(max_digits=6, decimal_places=2)
 
-
+class Location(models.Model):
+    """Model representing locations"""
+    trip_id = models.ForeignKey(Trip, on_delete=models.CASCADE)
+    start_name = models.CharField(max_length=255)
+    start_latitude = models.CharField(max_length=255)
+    start_longitude = models.CharField(max_length=255)
+    end_name = models.CharField(max_length=255)
+    end_latitude = models.CharField(max_length=255)
+    end_longitude = models.CharField(max_length=255)
 
 
     
