@@ -40,7 +40,23 @@ class Driver(models.Model):
     driver_license = models.CharField(max_length=255)
     vehicle_insurance = models.CharField(max_length=255)
     vehicle_registration = models.CharField(max_length=255)
-    joined_date = models.DateTimeField()
+    joined_date = models.DateTimeField(auto_now_add=True)
 
+class Transaction(models.Model):
+    PAY_TYPE = [
+        ('CASH', 'Cash'),
+        ('CARD', 'Card')
+    ]
+
+    """Model representing a transaction"""
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    driver_id = models.ForeignKey(Driver, on_delete=models.CASCADE)
+    timestamp = models.DateTimeField(auto_now_add=True)
+    payment_type = models.CharField(choices=PAY_TYPE, default='CARD')
+    base_amount = models.DecimalField(max_digits=6, decimal_places=2)
+    surge_amount = models.DecimalField(max_digits=6, decimal_places=2)
+    total_amount = models.DecimalField(max_digits=6, decimal_places=2)
+
+    
     
 
