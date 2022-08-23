@@ -57,6 +57,21 @@ class Transaction(models.Model):
     surge_amount = models.DecimalField(max_digits=6, decimal_places=2)
     total_amount = models.DecimalField(max_digits=6, decimal_places=2)
 
+class Trip(models.Model):
+    """Model representing trips"""
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    driver_id = models.ForeignKey(Driver, on_delete=models.CASCADE)
+    transaction_id = models.ForeignKey(Transaction, on_delete=models.CASCADE)
+    start_location = models.CharField(max_length=255)
+    end_location = models.CharField(max_length=255)
+    trip_start_time = models.DateTimeField()
+    trip_end_time = models.DateTimeField()
+    trip_wait_time = models.DateTimeField()
+    price = models.DecimalField(max_digits=6, decimal_places=2)
+
+
+
+
     
     
 
