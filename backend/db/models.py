@@ -20,13 +20,13 @@ class User(models.Model):
 class Car(models.Model):
     CAR_TYPE = [
         ('CONVERTABLE', 'Convertable'),
+        ('HATCHBACK','Hatchback'),
         ('SEDAN', 'Sedan'),
         ('SUV', 'SUV'),
         ('VAN', 'Van'),
     ]
 
     """Model representing a vehicle"""
-    driver_id = models.ForeignKey('Driver', on_delete=models.CASCADE)
     brand = models.CharField(max_length=255)
     model = models.CharField(max_length=255)
     type = models.CharField(choices=CAR_TYPE, max_length=255)
