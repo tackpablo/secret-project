@@ -1,5 +1,12 @@
+import * as React from "react";
+import Button from "@mui/material/Button";
+
 const CallButton = () => {
-    return <div className="">CALL</div>;
+    return (
+        <Button variant="contained" color="error">
+            Call
+        </Button>
+    );
 };
 
 export default CallButton;
