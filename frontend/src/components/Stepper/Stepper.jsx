@@ -5,8 +5,17 @@ import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import UserRegisterPage from "../RegisterPage/UserRegisterPage";
+import DriverRegisterPage from "../RegisterPage/DriverRegisterPage";
+import CodeVerificationPage from "../CodeVerificationPage/CodeVerificationPage";
 
 const steps = ["Register as user", "Register as driver", "Code Verification"];
+
+const components = [
+    <UserRegisterPage />,
+    <DriverRegisterPage />,
+    <CodeVerificationPage />,
+];
 
 export default function HorizontalLinearStepper() {
     const [activeStep, setActiveStep] = React.useState(0);
@@ -87,9 +96,9 @@ export default function HorizontalLinearStepper() {
                 </React.Fragment>
             ) : (
                 <React.Fragment>
-                    <Typography sx={{ mt: 2, mb: 1 }}>
-                        Step {activeStep + 1}
-                    </Typography>
+                    components.map((component) = (
+                    <Typography sx={{ mt: 2, mb: 1 }}>{component}</Typography>)
+                    )
                     <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
                         <Button
                             color="inherit"
