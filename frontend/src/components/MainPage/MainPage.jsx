@@ -10,8 +10,8 @@ const MainPage = () => {
                 Hi <br /> This is your Chauffeur
             </h1>
             <div className="buttons">
-                <RegisterButton />
                 <LoginButton />
+                <RegisterButton />
             </div>
         </div>
     );
