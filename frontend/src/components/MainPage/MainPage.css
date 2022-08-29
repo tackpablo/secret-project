@@ -1,11 +1,14 @@
 .welcome {
+    display: flex;
+    justify-content: center;
     height: 20vh;
 }
 
 .buttons {
     display: inline-flex;
     flex-direction: column;
-    width: 30vh;
     height: 40vh;
     justify-content: space-evenly;
+    width: 100vw;
+    align-items: center;
 }

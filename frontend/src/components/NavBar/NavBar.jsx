@@ -13,13 +13,7 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 
-import { Route, Routes, Link } from "react-router-dom";
-
-import MainPage from "../MainPage/MainPage";
-import TransactionsPage from "../TransactionsPage/TransactionsPage";
-import CallDriverList from "../CallDriverPage/CallDriverList";
-import DriverPage from "../DriverPage/DriverPage";
-import ProfilePage from "../ProfilePage/ProfilePage";
+import { Link } from "react-router-dom";
 
 const pages = [
     { text: "Call Driver", href: "/call" },
@@ -219,14 +213,6 @@ const NavBar = () => {
                     </Toolbar>
                 </Container>
             </AppBar>
-            <Routes>
-                <Route exact path="/" element={<MainPage />} />
-                <Route path="/call" element={<CallDriverList />} />
-                <Route path="/transaction" element={<TransactionsPage />} />
-                <Route path="/profile" element={<ProfilePage />} />
-                <Route path="/driver" element={<DriverPage />} />
-                <Route path="/logout" element={<MainPage />} />
-            </Routes>
         </>
     );
 };
