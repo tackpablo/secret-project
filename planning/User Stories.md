@@ -83,5 +83,5 @@ Maps
 # Tech Stack
 
 -   Front End - React
--   Back End - Django
+-   Back End - Express
 -   Database - PostgreSQL
