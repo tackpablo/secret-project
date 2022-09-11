@@ -26,7 +26,7 @@ app.use(express.static("../frontend/public"));
 // Separated Routes for each Resource
 const userRoute = require("./routes/users");
 const carRoute = require("./routes/cars");
-// const driverRoutes = require("./routes/drivers");
+const driverRoutes = require("./routes/drivers");
 // const transactionRoutes = require("./routes/transactions");
 // const tripRoutes = require("./routes/trips");
 // const locationRoutes = require("./routes/locations");
@@ -35,7 +35,7 @@ const carRoute = require("./routes/cars");
 // Mount all resource routes
 app.use("/api/users", userRoute(db));
 app.use("/api/cars", carRoute(db));
-// app.use("/api/drivers", driverRoutes(db));
+app.use("/api/drivers", driverRoutes(db));
 // app.use("/api/transactions", transactionRoutes(db));
 // app.use("/api/trips", tripRoutes(db));
 // app.use("/api/locations", locationRoutes(db));
