@@ -18,17 +18,7 @@ function App() {
             </div>
             <Routes>
                 <Route exact path="/" element={<MainPage />} />
-                <Route
-                    exact
-                    path="/welcome"
-                    element={
-                        localStorage.getItem("user") != null ? (
-                            <CallDriverList />
-                        ) : (
-                            <MainPage />
-                        )
-                    }
-                />
+
                 <Route
                     path="/call"
                     element={

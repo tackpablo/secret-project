@@ -13,7 +13,7 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import { authContext } from "../../Providers/AuthProvider";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const pages = [
     { text: "Call Driver", href: "/call" },
@@ -27,7 +27,8 @@ const settings = [
 const NavBar = () => {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
-    const { logout } = React.useContext(authContext);
+    const navigate = useNavigate();
+    const { logoutHandler } = React.useContext(authContext);
 
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
@@ -223,8 +224,9 @@ const NavBar = () => {
                                     <MenuItem
                                         key="Logout"
                                         onClick={() => {
-                                            logout();
+                                            logoutHandler();
                                             handleCloseUserMenu();
+                                            navigate("/");
                                         }}
                                         component={Link}
                                         to="/logout"
