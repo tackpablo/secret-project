@@ -1,5 +1,4 @@
 import * as React from "react";
-import { registerHandler } from "../../helpers/helpers";
 import "./UserRegisterPage.css";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -8,8 +7,11 @@ import MenuItem from "@mui/material/MenuItem";
 import FormHelperText from "@mui/material/FormHelperText";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
+import { authContext } from "../../Providers/AuthProvider";
 
 const UserRegisterPage = () => {
+    const { register } = React.useContext(authContext);
+
     const defaultRegisterObj = {
         first_name: "",
         last_name: "",
@@ -181,7 +183,7 @@ const UserRegisterPage = () => {
                 <Button
                     role="link"
                     variant="outlined"
-                    onClick={() => registerHandler(registerValues)}
+                    onClick={() => register(registerValues)}
                 >
                     Register
                 </Button>

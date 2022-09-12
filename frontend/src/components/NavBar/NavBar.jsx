@@ -12,7 +12,7 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
-
+import { authContext } from "../../Providers/AuthProvider";
 import { Link } from "react-router-dom";
 
 const pages = [
@@ -22,12 +22,12 @@ const pages = [
 const settings = [
     { text: "Profile", href: "/profile" },
     { text: "Driver Information", href: "/driver" },
-    { text: "Logout", href: "/logout" },
 ];
 
 const NavBar = () => {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
+    const { logout } = React.useContext(authContext);
 
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
@@ -208,6 +208,16 @@ const NavBar = () => {
                                         </Typography>
                                     </MenuItem>
                                 ))}
+                                <MenuItem
+                                    key="Logout"
+                                    onClick={() => logout()}
+                                    component={Link}
+                                    to="/logout"
+                                >
+                                    <Typography textAlign="center">
+                                        Logout
+                                    </Typography>
+                                </MenuItem>
                             </Menu>
                         </Box>
                     </Toolbar>
