@@ -7,6 +7,7 @@ const express = require("express");
 const app = express();
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
+const cors = require("cors");
 
 // PG database client/connection setup
 const { Pool } = require("pg");
@@ -21,6 +22,9 @@ app.use(morgan("dev"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// cors
+app.use(cors());
+
 app.use(express.static("../frontend/public"));
 
 // Separated Routes for each Resource
@@ -31,6 +35,8 @@ const transactionRoutes = require("./routes/transactions");
 const tripRoutes = require("./routes/trips");
 const locationRoutes = require("./routes/locations");
 const refundRoutes = require("./routes/refunds");
+const loginRoutes = require("./routes/login");
+const registerRoutes = require("./routes/register");
 
 // Mount all resource routes
 app.use("/api/users", userRoute(db));
@@ -40,6 +46,8 @@ app.use("/api/transactions", transactionRoutes(db));
 app.use("/api/trips", tripRoutes(db));
 app.use("/api/locations", locationRoutes(db));
 app.use("/api/refunds", refundRoutes(db));
+app.use("/login", loginRoutes(db));
+app.use("/register", registerRoutes(db));
 
 // Home page
 app.get("/", (req, res) => {

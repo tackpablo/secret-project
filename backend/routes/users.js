@@ -11,6 +11,7 @@ module.exports = (db) => {
             if (error) {
                 throw error;
             }
+
             return res.status(200).json(results.rows);
         });
     });
@@ -64,36 +65,37 @@ module.exports = (db) => {
     });
 
     // POST: ADD --- ADD NEW USER
-    router.post("/", async (req, res) => {
-        const {
-            first_name,
-            last_name,
-            email,
-            password,
-            phone_number,
-            city,
-            payment_type,
-            is_driver,
-        } = req.body;
-        const queryParams = [
-            first_name,
-            last_name,
-            email,
-            password,
-            phone_number,
-            city,
-            payment_type,
-            is_driver,
-        ];
-        const queryStr = `INSERT INTO users (first_name, last_name, email, password, phone_number, city, payment_type, is_driver) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *;`;
+    // router.post("/", async (req, res) => {
+    //     const {
+    //         first_name,
+    //         last_name,
+    //         email,
+    //         password,
+    //         phone_number,
+    //         city,
+    //         payment_type,
+    //         is_driver,
+    //     } = req.body;
+    //     const queryParams = [
+    //         first_name,
+    //         last_name,
+    //         email,
+    //         password,
+    //         phone_number,
+    //         city,
+    //         payment_type,
+    //         is_driver,
+    //     ];
+    //     const queryStr = `INSERT INTO users (first_name, last_name, email, password, phone_number, city, payment_type, is_driver) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *;`;
 
-        await db.query(queryStr, queryParams, (error, results) => {
-            if (error) {
-                throw error;
-            }
-            return res.status(200).json({ results });
-        });
-    });
+    //     await db.query(queryStr, queryParams, (error, results) => {
+    //         if (error) {
+    //             throw error;
+    //         }
+    //         console.log(results);
+    //         return res.status(200).json({ results });
+    //     });
+    // });
 
     // DELETE: DELETE --- DELETE USER
     router.delete("/:id", async (req, res) => {
