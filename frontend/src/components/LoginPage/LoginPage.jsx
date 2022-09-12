@@ -1,9 +1,9 @@
 import * as React from "react";
+import { loginHandler } from "../../helpers/helpers";
+import { usersContext } from "../../Providers/UsersProvider";
 import "./LoginPage.css";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
-import { loginHandler } from "../../helpers/helpers";
-import { usersContext } from "../../Providers/UsersProvider";
 
 const LoginPage = () => {
     const { setCurrentUser, login, currentUser } =
