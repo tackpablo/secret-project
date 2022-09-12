@@ -18,11 +18,57 @@ function App() {
             </div>
             <Routes>
                 <Route exact path="/" element={<MainPage />} />
-                <Route exact path="/welcome" element={<CallDriverList />} />
-                <Route path="/call" element={<CallDriverList />} />
-                <Route path="/transaction" element={<TransactionsPage />} />
-                <Route path="/profile" element={<ProfilePage />} />
-                <Route path="/driver" element={<DriverPage />} />
+                <Route
+                    exact
+                    path="/welcome"
+                    element={
+                        localStorage.getItem("user") != null ? (
+                            <CallDriverList />
+                        ) : (
+                            <MainPage />
+                        )
+                    }
+                />
+                <Route
+                    path="/call"
+                    element={
+                        localStorage.getItem("user") != null ? (
+                            <CallDriverList />
+                        ) : (
+                            <MainPage />
+                        )
+                    }
+                />
+                <Route
+                    path="/transaction"
+                    element={
+                        localStorage.getItem("user") != null ? (
+                            <TransactionsPage />
+                        ) : (
+                            <MainPage />
+                        )
+                    }
+                />
+                <Route
+                    path="/profile"
+                    element={
+                        localStorage.getItem("user") != null ? (
+                            <ProfilePage />
+                        ) : (
+                            <MainPage />
+                        )
+                    }
+                />
+                <Route
+                    path="/driver"
+                    element={
+                        localStorage.getItem("user") != null ? (
+                            <DriverPage />
+                        ) : (
+                            <MainPage />
+                        )
+                    }
+                />
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/register" element={<UserRegisterPage />} />
                 <Route path="/logout" element={<MainPage />} />
