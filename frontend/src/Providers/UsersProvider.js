@@ -16,22 +16,22 @@ export default function UsersProvider(props) {
 
     // Retrieve all users
     async function userList() {
-        const url = "/api/users";
-
         try {
+            const url = "http://localhost:8080/api/users";
             const response = await fetch(url);
+
             const data = await response.json();
-            console.log(data);
-            setAllUsers(data.users);
+
+            setAllUsers(data);
         } catch (err) {
             console.log("ERROR FETCHING USERS DATA", err);
         }
     }
 
     // Sets specific user by using cookie ID
-    useEffect(() => {
-        setCurrentUser(getUserByID(cookies.id, allUsers));
-    }, [allUsers]);
+    // useEffect(() => {
+    //     setCurrentUser(getUserByID(cookies.id, allUsers));
+    // }, [allUsers]);
 
     const login = function (id) {
         setCookie("id", id, { path: "/" });
