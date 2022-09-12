@@ -30,7 +30,6 @@ module.exports = (db) => {
             if (error) {
                 throw error;
             }
-            console.log(results);
             return res.status(200).json({ results });
         });
     });
