@@ -1,13 +1,11 @@
 import * as React from "react";
-import { loginHandler } from "../../helpers/helpers";
-import { usersContext } from "../../Providers/UsersProvider";
 import "./LoginPage.css";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
+import { authContext } from "../../Providers/AuthProvider";
 
 const LoginPage = () => {
-    const { setCurrentUser, login, currentUser } =
-        React.useContext(usersContext);
+    const { login } = React.useContext(authContext);
 
     const defaultLoginObj = {
         email: "",
@@ -15,7 +13,6 @@ const LoginPage = () => {
     };
 
     const [loginValues, setLoginValues] = React.useState(defaultLoginObj);
-    const [loggedInUser, setLoggedInUser] = React.useState(defaultLoginObj);
 
     function handleEmailChange(event) {
         setLoginValues({ ...loginValues, email: event.target.value });
@@ -51,16 +48,7 @@ const LoginPage = () => {
                 <Button
                     role="link"
                     variant="outlined"
-                    onClick={() =>
-                        loginHandler(
-                            loginValues,
-                            setLoggedInUser,
-                            setCurrentUser,
-                            loggedInUser,
-                            login,
-                            currentUser
-                        )
-                    }
+                    onClick={() => login(loginValues)}
                 >
                     Login
                 </Button>
