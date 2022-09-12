@@ -8,9 +8,11 @@ import FormHelperText from "@mui/material/FormHelperText";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { authContext } from "../../Providers/AuthProvider";
+import { useNavigate } from "react-router-dom";
 
 const UserRegisterPage = () => {
-    const { register } = React.useContext(authContext);
+    const { registerHandler } = React.useContext(authContext);
+    const navigate = useNavigate();
 
     const defaultRegisterObj = {
         first_name: "",
@@ -183,7 +185,10 @@ const UserRegisterPage = () => {
                 <Button
                     role="link"
                     variant="outlined"
-                    onClick={() => register(registerValues)}
+                    onClick={() => {
+                        registerHandler(registerValues);
+                        navigate("/call");
+                    }}
                 >
                     Register
                 </Button>

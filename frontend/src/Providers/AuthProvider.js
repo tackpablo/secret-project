@@ -1,10 +1,10 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext } from "react";
 
 export const authContext = createContext();
 
 export default function AuthProvider(props) {
     // Register user
-    const register = async (registerValues) => {
+    const registerHandler = async (registerValues) => {
         try {
             const url = `http://localhost:8080/register`;
             console.log("LOGINVALUES: ", registerValues);
@@ -27,7 +27,7 @@ export default function AuthProvider(props) {
     };
 
     // Login user
-    const login = async (loginValues) => {
+    const loginHandler = async (loginValues) => {
         try {
             const url = `http://localhost:8080/login`;
             console.log("LOGINVALUES: ", loginValues);
@@ -50,14 +50,14 @@ export default function AuthProvider(props) {
     };
 
     // Logout user
-    const logout = () => {
+    const logoutHandler = () => {
         localStorage.removeItem("user");
     };
 
     const userData = {
-        login,
-        logout,
-        register,
+        loginHandler,
+        logoutHandler,
+        registerHandler,
     };
 
     return (

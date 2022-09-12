@@ -3,9 +3,11 @@ import "./LoginPage.css";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import { authContext } from "../../Providers/AuthProvider";
+import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
-    const { login } = React.useContext(authContext);
+    const { loginHandler } = React.useContext(authContext);
+    const navigate = useNavigate();
 
     const defaultLoginObj = {
         email: "",
@@ -48,7 +50,10 @@ const LoginPage = () => {
                 <Button
                     role="link"
                     variant="outlined"
-                    onClick={() => login(loginValues)}
+                    onClick={() => {
+                        loginHandler(loginValues);
+                        navigate("/call");
+                    }}
                 >
                     Login
                 </Button>
