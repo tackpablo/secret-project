@@ -196,28 +196,44 @@ const NavBar = () => {
                                 open={Boolean(anchorElUser)}
                                 onClose={handleCloseUserMenu}
                             >
-                                {settings.map((setting) => (
+                                {localStorage.getItem("user") != null ? (
+                                    settings.map((setting) => (
+                                        <MenuItem
+                                            key={setting.text}
+                                            onClick={handleCloseUserMenu}
+                                            component={Link}
+                                            to={setting.href}
+                                        >
+                                            <Typography textAlign="center">
+                                                {setting.text}
+                                            </Typography>
+                                        </MenuItem>
+                                    ))
+                                ) : (
                                     <MenuItem
-                                        key={setting.text}
+                                        key="msg"
                                         onClick={handleCloseUserMenu}
-                                        component={Link}
-                                        to={setting.href}
                                     >
                                         <Typography textAlign="center">
-                                            {setting.text}
+                                            Please login!
                                         </Typography>
                                     </MenuItem>
-                                ))}
-                                <MenuItem
-                                    key="Logout"
-                                    onClick={() => logout()}
-                                    component={Link}
-                                    to="/logout"
-                                >
-                                    <Typography textAlign="center">
-                                        Logout
-                                    </Typography>
-                                </MenuItem>
+                                )}
+                                {localStorage.getItem("user") != null && (
+                                    <MenuItem
+                                        key="Logout"
+                                        onClick={() => {
+                                            logout();
+                                            handleCloseUserMenu();
+                                        }}
+                                        component={Link}
+                                        to="/logout"
+                                    >
+                                        <Typography textAlign="center">
+                                            Logout
+                                        </Typography>
+                                    </MenuItem>
+                                )}
                             </Menu>
                         </Box>
                     </Toolbar>
