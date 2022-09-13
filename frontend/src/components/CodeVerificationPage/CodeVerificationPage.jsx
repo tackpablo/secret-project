@@ -29,7 +29,7 @@ const CodeVerificationPage = () => {
                     required
                     id="outlined-verify-required"
                     label="Verification Code"
-                    defaultValue="Code"
+                    placeholder="Code"
                     onChange={(e) => handleVerifyChange(e)}
                 />
             </div>

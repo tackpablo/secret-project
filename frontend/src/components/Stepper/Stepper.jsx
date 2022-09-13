@@ -13,9 +13,9 @@ import { authContext } from "../../Providers/AuthProvider";
 import { useNavigate } from "react-router-dom";
 
 export default function HorizontalLinearStepper() {
-    const { registerHandler } = React.useContext(authContext);
     const [activeStep, setActiveStep] = React.useState(0);
     const [skipped, setSkipped] = React.useState(new Set());
+    const { registerHandler } = React.useContext(authContext);
     const navigate = useNavigate();
 
     const defaultUserRegisterObj = {
@@ -191,23 +191,22 @@ export default function HorizontalLinearStepper() {
                             )}
 
                             <Button onClick={handleNext}>
-                                {activeStep === steps.length - 1 ? (
-                                    <Button
-                                        role="link"
-                                        variant="outlined"
-                                        onClick={() => {
-                                            registerHandler(
-                                                userRegisterValues,
-                                                driverRegisterValues
-                                            );
-                                            navigate("/call");
-                                        }}
-                                    >
-                                        Register
-                                    </Button>
-                                ) : (
-                                    "Next"
-                                )}
+                                {activeStep === steps.length - 1
+                                    ? "Finish"
+                                    : // <Button
+                                      //     role="link"
+                                      //     variant="outlined"
+                                      //     onClick={() => {
+                                      //         registerHandler(
+                                      //             userRegisterValues,
+                                      //             driverRegisterValues
+                                      //         );
+                                      //         navigate("/call");
+                                      //     }}
+                                      // >
+                                      //     Register
+                                      // </Button>
+                                      "Next"}
                             </Button>
                         </Box>
                     </React.Fragment>
