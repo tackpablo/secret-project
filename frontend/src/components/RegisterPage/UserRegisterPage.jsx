@@ -1,98 +1,79 @@
 import * as React from "react";
 import "./UserRegisterPage.css";
-import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormHelperText from "@mui/material/FormHelperText";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-import { authContext } from "../../Providers/AuthProvider";
-import { useNavigate } from "react-router-dom";
 
-const UserRegisterPage = () => {
-    const { registerHandler } = React.useContext(authContext);
-    const navigate = useNavigate();
-
-    const defaultRegisterObj = {
-        first_name: "",
-        last_name: "",
-        email: "",
-        password: "",
-        phone_number: "",
-        city: "",
-        payment_type: "CASH" || "CARD",
-        is_driver: false,
-    };
-
-    const [registerValues, setRegisterValues] =
-        React.useState(defaultRegisterObj);
+const UserRegisterPage = ({ userRegisterValues, setUserRegisterValues }) => {
     const [payment, setPayment] = React.useState("");
     const [isDriver, setIsDriver] = React.useState(false);
 
     function handleFirstNameChange(event) {
-        setRegisterValues({
-            ...registerValues,
+        setUserRegisterValues({
+            ...userRegisterValues,
             first_name: event.target.value,
         });
     }
 
     function handleLastNameChange(event) {
-        setRegisterValues({
-            ...registerValues,
+        setUserRegisterValues({
+            ...userRegisterValues,
             last_name: event.target.value,
         });
     }
 
     function handleEmailChange(event) {
-        setRegisterValues({
-            ...registerValues,
+        setUserRegisterValues({
+            ...userRegisterValues,
             email: event.target.value,
         });
     }
 
     function handlePasswordChange(event) {
-        setRegisterValues({
-            ...registerValues,
+        setUserRegisterValues({
+            ...userRegisterValues,
             password: event.target.value,
         });
     }
 
     function handlePhoneChange(event) {
-        setRegisterValues({
-            ...registerValues,
+        setUserRegisterValues({
+            ...userRegisterValues,
             phone_number: event.target.value,
         });
     }
 
     function handleCityChange(event) {
-        setRegisterValues({
-            ...registerValues,
+        setUserRegisterValues({
+            ...userRegisterValues,
             city: event.target.value,
         });
     }
 
     function handlePaymentChange(event) {
         setPayment(event.target.value);
-        setRegisterValues({
-            ...registerValues,
+        setUserRegisterValues({
+            ...userRegisterValues,
             payment_type: event.target.value,
         });
     }
 
     function handleDriverChange(event) {
         setIsDriver(event.target.value);
-        setRegisterValues({
-            ...registerValues,
+        setUserRegisterValues({
+            ...userRegisterValues,
             is_driver: event.target.value,
         });
     }
     return (
         <>
             <h1 className="new">
-                Hi <br /> Register Here
+                Hi <br /> User Registration
             </h1>
-            <div className="login_fields">
+            <div className="user_register_fields">
                 <TextField
                     required
                     id="outlined-first-required"
@@ -109,7 +90,7 @@ const UserRegisterPage = () => {
                     onChange={(e) => handleLastNameChange(e)}
                 />
             </div>
-            <div className="login_fields">
+            <div className="user_register_fields">
                 <TextField
                     required
                     id="outlined-email-required"
@@ -126,11 +107,11 @@ const UserRegisterPage = () => {
                     onChange={(e) => handlePasswordChange(e)}
                 />
             </div>
-            <div className="login_fields">
+            <div className="user_register_fields">
                 <TextField
                     required
                     id="outlined-phone-required"
-                    label="Phone Number"
+                    label="+12345678910"
                     defaultValue="Phone Number"
                     onChange={(e) => handlePhoneChange(e)}
                 />
@@ -143,7 +124,7 @@ const UserRegisterPage = () => {
                     onChange={(e) => handleCityChange(e)}
                 />
             </div>
-            <div className="login_fields">
+            <div className="user_register_fields">
                 <FormControl sx={{ m: 1, minWidth: 120 }}>
                     <InputLabel id="demo-simple-select-payment-label">
                         Payment Type
@@ -179,19 +160,6 @@ const UserRegisterPage = () => {
                     </Select>
                     <FormHelperText>Will you be a driver?</FormHelperText>
                 </FormControl>
-            </div>
-
-            <div className="register_btn">
-                <Button
-                    role="link"
-                    variant="outlined"
-                    onClick={() => {
-                        registerHandler(registerValues);
-                        navigate("/call");
-                    }}
-                >
-                    Register
-                </Button>
             </div>
         </>
     );

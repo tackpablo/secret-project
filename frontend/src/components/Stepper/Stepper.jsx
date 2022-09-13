@@ -1,4 +1,5 @@
 import * as React from "react";
+import "./Stepper.css";
 import Box from "@mui/material/Box";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
@@ -8,18 +9,42 @@ import Typography from "@mui/material/Typography";
 import UserRegisterPage from "../RegisterPage/UserRegisterPage";
 import DriverRegisterPage from "../RegisterPage/DriverRegisterPage";
 import CodeVerificationPage from "../CodeVerificationPage/CodeVerificationPage";
-
-const steps = ["Register as user", "Register as driver", "Code Verification"];
-
-const components = [
-    <UserRegisterPage />,
-    <DriverRegisterPage />,
-    <CodeVerificationPage />,
-];
+import { authContext } from "../../Providers/AuthProvider";
+import { useNavigate } from "react-router-dom";
 
 export default function HorizontalLinearStepper() {
+    const { registerHandler } = React.useContext(authContext);
     const [activeStep, setActiveStep] = React.useState(0);
     const [skipped, setSkipped] = React.useState(new Set());
+    const navigate = useNavigate();
+
+    const defaultUserRegisterObj = {
+        first_name: "",
+        last_name: "",
+        email: "",
+        password: "",
+        phone_number: "",
+        city: "",
+        payment_type: "CASH" || "CARD",
+        is_driver: false,
+    };
+
+    const [userRegisterValues, setUserRegisterValues] = React.useState(
+        defaultUserRegisterObj
+    );
+
+    const defaultDriverRegisterObj = {
+        background_check: "",
+        profile_photo: "",
+        driver_license: "",
+        vehicle_insurance: "",
+        vehicle_registration: "",
+        joined_date: Date.now(),
+    };
+
+    const [driverRegisterValues, setDriverRegisterValues] = React.useState(
+        defaultDriverRegisterObj
+    );
 
     const isStepOptional = (step) => {
         return step === 1;
@@ -63,70 +88,131 @@ export default function HorizontalLinearStepper() {
         setActiveStep(0);
     };
 
+    const steps = [
+        {
+            name: "Register as user",
+            component: (
+                <UserRegisterPage
+                    userRegisterValues={userRegisterValues}
+                    setUserRegisterValues={setUserRegisterValues}
+                />
+            ),
+        },
+        {
+            name: "Register as driver",
+            component: (
+                <DriverRegisterPage
+                    driverRegisterValues={driverRegisterValues}
+                    setDriverRegisterValues={setDriverRegisterValues}
+                />
+            ),
+        },
+        { name: "Code Verification", component: <CodeVerificationPage /> },
+    ];
+
+    const components = [
+        <UserRegisterPage handleNext={handleNext} />,
+        <DriverRegisterPage />,
+        <CodeVerificationPage />,
+    ];
+
     return (
-        <Box sx={{ width: "100%" }}>
-            <Stepper activeStep={activeStep}>
-                {steps.map((label, index) => {
-                    const stepProps = {};
-                    const labelProps = {};
-                    if (isStepOptional(index)) {
-                        labelProps.optional = (
-                            <Typography variant="caption">Optional</Typography>
+        <div className="stepper">
+            <Box sx={{ width: "80%" }} padding="1em">
+                <Stepper activeStep={activeStep}>
+                    {steps.map((label, index) => {
+                        const stepProps = {};
+                        const labelProps = {};
+                        if (isStepOptional(index)) {
+                            labelProps.optional = (
+                                <Typography variant="caption">
+                                    Optional
+                                </Typography>
+                            );
+                        }
+                        if (isStepSkipped(index)) {
+                            stepProps.completed = false;
+                        }
+                        return (
+                            <Step key={index} {...stepProps}>
+                                <StepLabel {...labelProps}>
+                                    {label.name}
+                                </StepLabel>
+                            </Step>
                         );
-                    }
-                    if (isStepSkipped(index)) {
-                        stepProps.completed = false;
-                    }
-                    return (
-                        <Step key={label} {...stepProps}>
-                            <StepLabel {...labelProps}>{label}</StepLabel>
-                        </Step>
-                    );
-                })}
-            </Stepper>
-            {activeStep === steps.length ? (
-                <React.Fragment>
-                    <Typography sx={{ mt: 2, mb: 1 }}>
-                        All steps completed - you&apos;re finished
-                    </Typography>
-                    <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
-                        <Box sx={{ flex: "1 1 auto" }} />
-                        <Button onClick={handleReset}>Reset</Button>
-                    </Box>
-                </React.Fragment>
-            ) : (
-                <React.Fragment>
-                    components.map((component) = (
-                    <Typography sx={{ mt: 2, mb: 1 }}>{component}</Typography>)
-                    )
-                    <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
-                        <Button
-                            color="inherit"
-                            disabled={activeStep === 0}
-                            onClick={handleBack}
-                            sx={{ mr: 1 }}
+                    })}
+                </Stepper>
+
+                {activeStep === steps.length ? (
+                    <React.Fragment>
+                        <Typography sx={{ mt: 2, mb: 1 }}>
+                            All steps completed - you&apos;re finished
+                        </Typography>
+                        <Box
+                            sx={{
+                                display: "flex",
+                                flexDirection: "row",
+                                pt: 2,
+                            }}
                         >
-                            Back
-                        </Button>
-                        <Box sx={{ flex: "1 1 auto" }} />
-                        {isStepOptional(activeStep) && (
+                            <Box sx={{ flex: "1 1 auto" }} />
+                            <Button onClick={handleReset}>Reset</Button>
+                        </Box>
+                    </React.Fragment>
+                ) : (
+                    <React.Fragment>
+                        <Typography sx={{ mt: 2, mb: 1 }} component={"span"}>
+                            {components[activeStep]}
+                        </Typography>
+                        <Box
+                            sx={{
+                                display: "flex",
+                                flexDirection: "row",
+                                pt: 2,
+                            }}
+                        >
                             <Button
                                 color="inherit"
-                                onClick={handleSkip}
+                                disabled={activeStep === 0}
+                                onClick={handleBack}
                                 sx={{ mr: 1 }}
                             >
-                                Skip
+                                Back
                             </Button>
-                        )}
+                            <Box sx={{ flex: "1 1 auto" }} />
+                            {isStepOptional(activeStep) && (
+                                <Button
+                                    color="inherit"
+                                    onClick={handleSkip}
+                                    sx={{ mr: 1 }}
+                                >
+                                    Skip
+                                </Button>
+                            )}
 
-                        <Button onClick={handleNext}>
-                            {activeStep === steps.length - 1
-                                ? "Finish"
-                                : "Next"}
-                        </Button>
-                    </Box>
-                </React.Fragment>
-            )}
-        </Box>
+                            <Button onClick={handleNext}>
+                                {activeStep === steps.length - 1 ? (
+                                    <Button
+                                        role="link"
+                                        variant="outlined"
+                                        onClick={() => {
+                                            registerHandler(
+                                                userRegisterValues,
+                                                driverRegisterValues
+                                            );
+                                            navigate("/call");
+                                        }}
+                                    >
+                                        Register
+                                    </Button>
+                                ) : (
+                                    "Next"
+                                )}
+                            </Button>
+                        </Box>
+                    </React.Fragment>
+                )}
+            </Box>
+        </div>
     );
 }
