@@ -1,0 +1,16 @@
+.verify {
+    display: flex;
+    justify-content: center;
+}
+
+.verify_fields {
+    display: flex;
+    justify-content: center;
+    padding-top: 1em;
+}
+
+.verify_btn {
+    display: flex;
+    justify-content: center;
+    padding-top: 1em;
+}

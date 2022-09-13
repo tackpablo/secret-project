@@ -1,14 +1,15 @@
 import "./App.css";
-import React, { useContext } from "react";
+import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import NavBar from "./components/NavBar/NavBar";
 import MainPage from "./components/MainPage/MainPage";
 import LoginPage from "./components/LoginPage/LoginPage";
-import UserRegisterPage from "./components/RegisterPage/UserRegisterPage";
 import TransactionsPage from "./components/TransactionsPage/TransactionsPage";
 import CallDriverList from "./components/CallDriverPage/CallDriverList";
 import DriverPage from "./components/DriverPage/DriverPage";
 import ProfilePage from "./components/ProfilePage/ProfilePage";
+import CodeVerificationPage from "./components/CodeVerificationPage/CodeVerificationPage";
+import HorizontalLinearStepper from "./components/Stepper/Stepper";
 
 function App() {
     return (
@@ -60,7 +61,8 @@ function App() {
                     }
                 />
                 <Route path="/login" element={<LoginPage />} />
-                <Route path="/register" element={<UserRegisterPage />} />
+                <Route path="/register" element={<HorizontalLinearStepper />} />
+                <Route path="/verify" element={<CodeVerificationPage />} />
                 <Route path="/logout" element={<MainPage />} />
             </Routes>
         </Router>

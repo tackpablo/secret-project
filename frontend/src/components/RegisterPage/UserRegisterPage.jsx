@@ -130,7 +130,7 @@ const UserRegisterPage = () => {
                 <TextField
                     required
                     id="outlined-phone-required"
-                    label="Phone Number"
+                    label="+12345678910"
                     defaultValue="Phone Number"
                     onChange={(e) => handlePhoneChange(e)}
                 />
