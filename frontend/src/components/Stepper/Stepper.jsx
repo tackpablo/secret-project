@@ -15,6 +15,7 @@ import { useNavigate } from "react-router-dom";
 export default function HorizontalLinearStepper() {
     const [activeStep, setActiveStep] = React.useState(0);
     const [skipped, setSkipped] = React.useState(new Set());
+    const [isDriver, setIsDriver] = React.useState("");
     const { registerHandler } = React.useContext(authContext);
     const navigate = useNavigate();
 
@@ -45,6 +46,10 @@ export default function HorizontalLinearStepper() {
     const [driverRegisterValues, setDriverRegisterValues] = React.useState(
         defaultDriverRegisterObj
     );
+
+    const handleStep = (step) => () => {
+        setActiveStep(step);
+    };
 
     const isStepOptional = (step) => {
         return step === 1;
@@ -93,6 +98,9 @@ export default function HorizontalLinearStepper() {
             name: "Register as user",
             component: (
                 <UserRegisterPage
+                    handleNext={handleNext}
+                    isDriver={isDriver}
+                    setIsDriver={setIsDriver}
                     userRegisterValues={userRegisterValues}
                     setUserRegisterValues={setUserRegisterValues}
                 />
@@ -102,18 +110,14 @@ export default function HorizontalLinearStepper() {
             name: "Register as driver",
             component: (
                 <DriverRegisterPage
+                    isDriver={isDriver}
+                    userRegisterValues={userRegisterValues}
                     driverRegisterValues={driverRegisterValues}
                     setDriverRegisterValues={setDriverRegisterValues}
                 />
             ),
         },
         { name: "Code Verification", component: <CodeVerificationPage /> },
-    ];
-
-    const components = [
-        <UserRegisterPage handleNext={handleNext} />,
-        <DriverRegisterPage />,
-        <CodeVerificationPage />,
     ];
 
     return (
@@ -135,7 +139,10 @@ export default function HorizontalLinearStepper() {
                         }
                         return (
                             <Step key={index} {...stepProps}>
-                                <StepLabel {...labelProps}>
+                                <StepLabel
+                                    {...labelProps}
+                                    onClick={handleStep(index)}
+                                >
                                     {label.name}
                                 </StepLabel>
                             </Step>
@@ -162,7 +169,7 @@ export default function HorizontalLinearStepper() {
                 ) : (
                     <React.Fragment>
                         <Typography sx={{ mt: 2, mb: 1 }} component={"span"}>
-                            {components[activeStep]}
+                            {steps[activeStep].component}
                         </Typography>
                         <Box
                             sx={{
@@ -180,15 +187,16 @@ export default function HorizontalLinearStepper() {
                                 Back
                             </Button>
                             <Box sx={{ flex: "1 1 auto" }} />
-                            {isStepOptional(activeStep) && (
-                                <Button
-                                    color="inherit"
-                                    onClick={handleSkip}
-                                    sx={{ mr: 1 }}
-                                >
-                                    Skip
-                                </Button>
-                            )}
+                            {isStepOptional(activeStep) &&
+                                !userRegisterValues.is_driver && (
+                                    <Button
+                                        color="inherit"
+                                        onClick={handleSkip}
+                                        sx={{ mr: 1 }}
+                                    >
+                                        Skip
+                                    </Button>
+                                )}
 
                             <Button onClick={handleNext}>
                                 {activeStep === steps.length - 1

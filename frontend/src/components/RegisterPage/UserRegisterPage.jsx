@@ -7,9 +7,13 @@ import FormHelperText from "@mui/material/FormHelperText";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 
-const UserRegisterPage = ({ userRegisterValues, setUserRegisterValues }) => {
+const UserRegisterPage = ({
+    isDriver,
+    setIsDriver,
+    userRegisterValues,
+    setUserRegisterValues,
+}) => {
     const [payment, setPayment] = React.useState("");
-    const [isDriver, setIsDriver] = React.useState(false);
 
     function handleFirstNameChange(event) {
         setUserRegisterValues({
@@ -155,6 +159,9 @@ const UserRegisterPage = ({ userRegisterValues, setUserRegisterValues }) => {
                         label="Driver"
                         onChange={handleDriverChange}
                     >
+                        <MenuItem value="">
+                            <em>Select</em>
+                        </MenuItem>
                         <MenuItem value="true">True</MenuItem>
                         <MenuItem value="false">False</MenuItem>
                     </Select>

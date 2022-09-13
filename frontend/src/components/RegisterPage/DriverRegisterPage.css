@@ -8,3 +8,10 @@
     justify-content: center;
     padding-top: 1em;
 }
+
+.driver-alert {
+    display: flex;
+    color: red;
+    font-size: medium;
+    justify-content: center;
+}
