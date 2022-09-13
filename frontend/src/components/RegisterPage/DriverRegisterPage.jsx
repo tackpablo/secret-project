@@ -3,6 +3,8 @@ import "./DriverRegisterPage.css";
 import TextField from "@mui/material/TextField";
 
 const DriverRegisterPage = ({
+    isDriver,
+    userRegisterValues,
     driverRegisterValues,
     setDriverRegisterValues,
 }) => {
@@ -44,14 +46,19 @@ const DriverRegisterPage = ({
     return (
         <>
             <h1 className="new">
-                Hi <br /> User Registration
+                Hi <br /> Driver Registration
             </h1>
+            {isDriver === "false" || isDriver === "" ? (
+                <p className="driver-alert">Please Skip this step</p>
+            ) : (
+                ""
+            )}
             <div className="driver_register_fields">
                 <TextField
                     required
                     id="outlined-background-required"
                     label="Background Check"
-                    defaultValue="Background Check"
+                    placeholder="Background Check"
                     onChange={(e) => handleBgCheckChange(e)}
                 />
                 &nbsp; &nbsp;
@@ -59,7 +66,7 @@ const DriverRegisterPage = ({
                     required
                     id="outlined-profile-required"
                     label="Profile Photo"
-                    defaultValue="Profile Photo"
+                    placeholder="Profile Photo"
                     onChange={(e) => handleProfilePicChange(e)}
                 />
             </div>
@@ -68,7 +75,7 @@ const DriverRegisterPage = ({
                     required
                     id="outlined-license-required"
                     label="Driver License"
-                    defaultValue="Driver License"
+                    placeholder="Driver License"
                     onChange={(e) => handleLicenseChange(e)}
                 />
                 &nbsp; &nbsp;
@@ -76,7 +83,7 @@ const DriverRegisterPage = ({
                     required
                     id="outlined-insurance-required"
                     label="Vehicle Insurance"
-                    defaultValue="Vehicle Insurance"
+                    placeholder="Vehicle Insurance"
                     onChange={(e) => handleInsuranceChange(e)}
                 />
             </div>
@@ -85,7 +92,7 @@ const DriverRegisterPage = ({
                     required
                     id="outlined-registration-required"
                     label="Vehicle Registration"
-                    defaultValue="Vehicle Registration"
+                    placeholder="Vehicle Registration"
                     onChange={(e) => handleRegistrationChange(e)}
                 />
             </div>

@@ -7,9 +7,13 @@ import FormHelperText from "@mui/material/FormHelperText";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 
-const UserRegisterPage = ({ userRegisterValues, setUserRegisterValues }) => {
+const UserRegisterPage = ({
+    isDriver,
+    setIsDriver,
+    userRegisterValues,
+    setUserRegisterValues,
+}) => {
     const [payment, setPayment] = React.useState("");
-    const [isDriver, setIsDriver] = React.useState(false);
 
     function handleFirstNameChange(event) {
         setUserRegisterValues({
@@ -78,7 +82,7 @@ const UserRegisterPage = ({ userRegisterValues, setUserRegisterValues }) => {
                     required
                     id="outlined-first-required"
                     label="First Name"
-                    defaultValue="First Name"
+                    placeholder="First Name"
                     onChange={(e) => handleFirstNameChange(e)}
                 />
                 &nbsp; &nbsp;
@@ -86,7 +90,7 @@ const UserRegisterPage = ({ userRegisterValues, setUserRegisterValues }) => {
                     required
                     id="outlined-last-required"
                     label="Last Name"
-                    defaultValue="Last Name"
+                    placeholder="Last Name"
                     onChange={(e) => handleLastNameChange(e)}
                 />
             </div>
@@ -95,7 +99,7 @@ const UserRegisterPage = ({ userRegisterValues, setUserRegisterValues }) => {
                     required
                     id="outlined-email-required"
                     label="Email"
-                    defaultValue="Email"
+                    placeholder="Email"
                     onChange={(e) => handleEmailChange(e)}
                 />
                 &nbsp; &nbsp;
@@ -112,7 +116,7 @@ const UserRegisterPage = ({ userRegisterValues, setUserRegisterValues }) => {
                     required
                     id="outlined-phone-required"
                     label="+12345678910"
-                    defaultValue="Phone Number"
+                    placeholder="Phone Number"
                     onChange={(e) => handlePhoneChange(e)}
                 />
                 &nbsp; &nbsp;
@@ -120,7 +124,7 @@ const UserRegisterPage = ({ userRegisterValues, setUserRegisterValues }) => {
                     required
                     id="outlined-city-required"
                     label="City"
-                    defaultValue="City"
+                    placeholder="City"
                     onChange={(e) => handleCityChange(e)}
                 />
             </div>
@@ -155,6 +159,9 @@ const UserRegisterPage = ({ userRegisterValues, setUserRegisterValues }) => {
                         label="Driver"
                         onChange={handleDriverChange}
                     >
+                        <MenuItem value="">
+                            <em>Select</em>
+                        </MenuItem>
                         <MenuItem value="true">True</MenuItem>
                         <MenuItem value="false">False</MenuItem>
                     </Select>
