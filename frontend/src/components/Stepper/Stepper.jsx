@@ -10,14 +10,6 @@ import UserRegisterPage from "../RegisterPage/UserRegisterPage";
 import DriverRegisterPage from "../RegisterPage/DriverRegisterPage";
 import CodeVerificationPage from "../CodeVerificationPage/CodeVerificationPage";
 
-const steps = [
-    { name: "Register as user", component: <UserRegisterPage /> },
-    { name: "Register as driver", component: <DriverRegisterPage /> },
-    { name: "Code Verification", component: <CodeVerificationPage /> },
-];
-
-const components = [, ,];
-
 export default function HorizontalLinearStepper() {
     const [activeStep, setActiveStep] = React.useState(0);
     const [skipped, setSkipped] = React.useState(new Set());
@@ -64,9 +56,21 @@ export default function HorizontalLinearStepper() {
         setActiveStep(0);
     };
 
+    const steps = [
+        { name: "Register as user", component: <UserRegisterPage /> },
+        { name: "Register as driver", component: <DriverRegisterPage /> },
+        { name: "Code Verification", component: <CodeVerificationPage /> },
+    ];
+
+    const components = [
+        <UserRegisterPage handleNext={handleNext} />,
+        <DriverRegisterPage />,
+        <CodeVerificationPage />,
+    ];
+
     return (
         <div className="stepper">
-            <Box sx={{ width: "80%" }} padding="2em">
+            <Box sx={{ width: "80%" }} padding="1em">
                 <Stepper activeStep={activeStep}>
                     {steps.map((label, index) => {
                         const stepProps = {};
@@ -82,14 +86,15 @@ export default function HorizontalLinearStepper() {
                             stepProps.completed = false;
                         }
                         return (
-                            <Step key={label.index} {...stepProps}>
+                            <Step key={index} {...stepProps}>
                                 <StepLabel {...labelProps}>
-                                    {label.component}
+                                    {label.name}
                                 </StepLabel>
                             </Step>
                         );
                     })}
                 </Stepper>
+
                 {activeStep === steps.length ? (
                     <React.Fragment>
                         <Typography sx={{ mt: 2, mb: 1 }}>
@@ -108,8 +113,8 @@ export default function HorizontalLinearStepper() {
                     </React.Fragment>
                 ) : (
                     <React.Fragment>
-                        <Typography sx={{ mt: 2, mb: 1 }}>
-                            Step {activeStep + 1}
+                        <Typography sx={{ mt: 2, mb: 1 }} component={"span"}>
+                            {components[activeStep]}
                         </Typography>
                         <Box
                             sx={{
