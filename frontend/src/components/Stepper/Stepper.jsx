@@ -9,10 +9,42 @@ import Typography from "@mui/material/Typography";
 import UserRegisterPage from "../RegisterPage/UserRegisterPage";
 import DriverRegisterPage from "../RegisterPage/DriverRegisterPage";
 import CodeVerificationPage from "../CodeVerificationPage/CodeVerificationPage";
+import { authContext } from "../../Providers/AuthProvider";
+import { useNavigate } from "react-router-dom";
 
 export default function HorizontalLinearStepper() {
+    const { registerHandler } = React.useContext(authContext);
     const [activeStep, setActiveStep] = React.useState(0);
     const [skipped, setSkipped] = React.useState(new Set());
+    const navigate = useNavigate();
+
+    const defaultUserRegisterObj = {
+        first_name: "",
+        last_name: "",
+        email: "",
+        password: "",
+        phone_number: "",
+        city: "",
+        payment_type: "CASH" || "CARD",
+        is_driver: false,
+    };
+
+    const [userRegisterValues, setUserRegisterValues] = React.useState(
+        defaultUserRegisterObj
+    );
+
+    const defaultDriverRegisterObj = {
+        background_check: "",
+        profile_photo: "",
+        driver_license: "",
+        vehicle_insurance: "",
+        vehicle_registration: "",
+        joined_date: Date.now(),
+    };
+
+    const [driverRegisterValues, setDriverRegisterValues] = React.useState(
+        defaultDriverRegisterObj
+    );
 
     const isStepOptional = (step) => {
         return step === 1;
@@ -57,8 +89,24 @@ export default function HorizontalLinearStepper() {
     };
 
     const steps = [
-        { name: "Register as user", component: <UserRegisterPage /> },
-        { name: "Register as driver", component: <DriverRegisterPage /> },
+        {
+            name: "Register as user",
+            component: (
+                <UserRegisterPage
+                    userRegisterValues={userRegisterValues}
+                    setUserRegisterValues={setUserRegisterValues}
+                />
+            ),
+        },
+        {
+            name: "Register as driver",
+            component: (
+                <DriverRegisterPage
+                    driverRegisterValues={driverRegisterValues}
+                    setDriverRegisterValues={setDriverRegisterValues}
+                />
+            ),
+        },
         { name: "Code Verification", component: <CodeVerificationPage /> },
     ];
 
@@ -143,9 +191,23 @@ export default function HorizontalLinearStepper() {
                             )}
 
                             <Button onClick={handleNext}>
-                                {activeStep === steps.length - 1
-                                    ? "Finish"
-                                    : "Next"}
+                                {activeStep === steps.length - 1 ? (
+                                    <Button
+                                        role="link"
+                                        variant="outlined"
+                                        onClick={() => {
+                                            registerHandler(
+                                                userRegisterValues,
+                                                driverRegisterValues
+                                            );
+                                            navigate("/call");
+                                        }}
+                                    >
+                                        Register
+                                    </Button>
+                                ) : (
+                                    "Next"
+                                )}
                             </Button>
                         </Box>
                     </React.Fragment>

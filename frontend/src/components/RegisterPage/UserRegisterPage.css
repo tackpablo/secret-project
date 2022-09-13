@@ -3,13 +3,7 @@
     justify-content: center;
 }
 
-.login_fields {
-    display: flex;
-    justify-content: center;
-    padding-top: 1em;
-}
-
-.register_btn {
+.user_register_fields {
     display: flex;
     justify-content: center;
     padding-top: 1em;

@@ -1,9 +1,9 @@
-.stepper {
+.new {
     display: flex;
     justify-content: center;
 }
 
-.register_btn {
+.driver_register_fields {
     display: flex;
     justify-content: center;
     padding-top: 1em;
