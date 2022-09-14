@@ -17,7 +17,7 @@ export default function HorizontalLinearStepper() {
     const [activeStep, setActiveStep] = React.useState(0);
     const [skipped, setSkipped] = React.useState(new Set());
     const [isDriver, setIsDriver] = React.useState("");
-    const { registerHandler } = React.useContext(authContext);
+    const { userRegisterHandler } = React.useContext(authContext);
     const navigate = useNavigate();
 
     const defaultUserRegisterObj = {
@@ -52,6 +52,7 @@ export default function HorizontalLinearStepper() {
         brand: "",
         model: "",
         type: "",
+        color: "",
     };
 
     const [carRegisterValues, setCarRegisterValues] =
@@ -120,7 +121,7 @@ export default function HorizontalLinearStepper() {
                     role="link"
                     variant="outlined"
                     onClick={() => {
-                        registerHandler(
+                        userRegisterHandler(
                             userRegisterValues,
                             driverRegisterValues
                         );
@@ -129,23 +130,6 @@ export default function HorizontalLinearStepper() {
                 >
                     Register
                 </Button>
-            ),
-        },
-        {
-            name: "Register your car",
-            component: (
-                <>
-                    <h1 className="new">Driver and Car Registration</h1>
-
-                    <div className="driver-reg">
-                        <div>
-                            <CarRegisterPage
-                                carRegisterValues={carRegisterValues}
-                                setCarRegisterValues={setCarRegisterValues}
-                            />
-                        </div>
-                    </div>
-                </>
             ),
         },
         {
@@ -165,6 +149,23 @@ export default function HorizontalLinearStepper() {
                                 setDriverRegisterValues={
                                     setDriverRegisterValues
                                 }
+                            />
+                        </div>
+                    </div>
+                </>
+            ),
+        },
+        {
+            name: "Register your car",
+            component: (
+                <>
+                    <h1 className="new">Driver and Car Registration</h1>
+
+                    <div className="driver-reg">
+                        <div>
+                            <CarRegisterPage
+                                carRegisterValues={carRegisterValues}
+                                setCarRegisterValues={setCarRegisterValues}
                             />
                         </div>
                     </div>

@@ -24,6 +24,13 @@ const CarRegisterPage = ({ carRegisterValues, setCarRegisterValues }) => {
         });
     }
 
+    function handleColorChange(event) {
+        setCarRegisterValues({
+            ...carRegisterValues,
+            color: event.target.value,
+        });
+    }
+
     return (
         <>
             <div className="car_register_fields">
@@ -50,6 +57,14 @@ const CarRegisterPage = ({ carRegisterValues, setCarRegisterValues }) => {
                     label="Car Type"
                     placeholder="Car Type"
                     onChange={(e) => handleTypeChange(e)}
+                />
+                &nbsp; &nbsp;
+                <TextField
+                    required
+                    id="outlined-color-required"
+                    label="Car Color"
+                    placeholder="Car Color"
+                    onChange={(e) => handleColorChange(e)}
                 />
             </div>
         </>
