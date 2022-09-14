@@ -4,10 +4,10 @@ export const authContext = createContext();
 
 export default function AuthProvider(props) {
     // Register user
-    const registerHandler = async (registerValues) => {
+    const userRegisterHandler = async (registerValues) => {
         try {
             const url = `http://localhost:8080/register`;
-            console.log("REGISTERVALUES: ", registerValues);
+            console.log("USERREGISTERVALUES: ", registerValues);
             const response = await fetch(url, {
                 method: "POST",
                 headers: {
@@ -24,6 +24,46 @@ export default function AuthProvider(props) {
         } catch (err) {
             console.log(err);
         }
+    };
+
+    // Register driver
+    const driverRegisterHandler = async (driverRegisterValues) => {
+        // try {
+        //     const url = `http://localhost:8080/register`;
+        //     console.log("DRIVERREGISTERVALUES: ", driverRegisterValues);
+        //     const response = await fetch(url, {
+        //         method: "POST",
+        //         headers: {
+        //             "Content-type": "application/json",
+        //         },
+        //         body: JSON.stringify(driverRegisterValues),
+        //     });
+        //     const data = await response.json();
+        //     const userData = data.results.rows[0];
+        //     return response.data;
+        // } catch (err) {
+        //     console.log(err);
+        // }
+    };
+
+    // Register car
+    const carRegisterHandler = async (carRegisterValues) => {
+        // try {
+        //     const url = `http://localhost:8080/register`;
+        //     console.log("REGISTERVALUES: ", carRegisterValues);
+        //     const response = await fetch(url, {
+        //         method: "POST",
+        //         headers: {
+        //             "Content-type": "application/json",
+        //         },
+        //         body: JSON.stringify(carRegisterValues),
+        //     });
+        //     const data = await response.json();
+        //     const userData = data.results.rows[0];
+        //     return response.data;
+        // } catch (err) {
+        //     console.log(err);
+        // }
     };
 
     // Login user
@@ -57,7 +97,9 @@ export default function AuthProvider(props) {
     const userData = {
         loginHandler,
         logoutHandler,
-        registerHandler,
+        userRegisterHandler,
+        driverRegisterHandler,
+        carRegisterHandler,
     };
 
     return (
