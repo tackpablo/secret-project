@@ -120,7 +120,7 @@ export default function HorizontalLinearStepper() {
             name: "Register as driver",
             component: (
                 <>
-                    <h1 className="new">Driver/Car Registration</h1>
+                    <h1 className="new">Driver and Car Registration</h1>
                     {isDriver === "false" || isDriver === "" ? (
                         <p className="driver-alert">Please Skip this step</p>
                     ) : (
@@ -155,7 +155,7 @@ export default function HorizontalLinearStepper() {
                     {steps.map((label, index) => {
                         const stepProps = {};
                         const labelProps = {};
-                        if (isStepOptional(1, 2)) {
+                        if (isStepOptional(index)) {
                             labelProps.optional = (
                                 <Typography variant="caption">
                                     Optional
