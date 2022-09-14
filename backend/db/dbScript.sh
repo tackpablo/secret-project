@@ -32,14 +32,16 @@ INSERT INTO users (first_name, last_name, email, password, phone_number, city, p
 
 CREATE TABLE cars (
   id SERIAL PRIMARY KEY NOT NULL,
+  user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
   brand VARCHAR(255) NOT NULL,
   model VARCHAR(255) NOT NULL,
+  color VARCHAR(255) NOT NULL,
   type VARCHAR(255) NOT NULL
 );
 
-INSERT INTO cars (brand, model, type) VALUES
-  ('Honda', 'Civic', 'Hatchback'),
-  ('Toyota', 'Camry', 'Sedan')
+INSERT INTO cars (user_id, brand, model, color, type) VALUES
+  (1, 'Honda', 'Civic', "black", 'Hatchback'),
+  (2, 'Toyota', 'Camry', "blue", 'Sedan')
 ;
 
 
