@@ -103,10 +103,10 @@ INSERT INTO trips (user_id, driver_id, transaction_id, start_location, end_locat
 CREATE TABLE locations (
   id SERIAL PRIMARY KEY NOT NULL,
   trip_id INTEGER REFERENCES trips(id) ON DELETE CASCADE,
-  start_name VARCHAR(255) NOT NULL,
+  start_location VARCHAR(255) NOT NULL,
   start_latitude VARCHAR(255) NOT NULL,
   start_longitude VARCHAR(255) NOT NULL,
-  end_name VARCHAR(255) NOT NULL,
+  end_location VARCHAR(255) NOT NULL,
   end_latitude VARCHAR(255) NOT NULL,
   end_longitude VARCHAR(255) NOT NULL
 );
