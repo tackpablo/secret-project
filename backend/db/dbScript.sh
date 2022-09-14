@@ -37,9 +37,9 @@ CREATE TABLE cars (
   type VARCHAR(255) NOT NULL
 );
 
-INSERT INTO cars (brand, model, type) VALUES
-  ('Honda', 'Civic', 'Hatchback'),
-  ('Toyota', 'Camry', 'Sedan')
+INSERT INTO cars (user_id, brand, model, color, type) VALUES
+  (1, 'Honda', 'Civic', "black", 'Hatchback'),
+  (2, 'Toyota', 'Camry', "blue", 'Sedan')
 ;
 
 
