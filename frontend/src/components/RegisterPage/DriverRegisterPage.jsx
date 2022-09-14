@@ -3,8 +3,6 @@ import "./DriverRegisterPage.css";
 import TextField from "@mui/material/TextField";
 
 const DriverRegisterPage = ({
-    isDriver,
-    userRegisterValues,
     driverRegisterValues,
     setDriverRegisterValues,
 }) => {
@@ -45,14 +43,6 @@ const DriverRegisterPage = ({
 
     return (
         <>
-            <h1 className="new">
-                Hi <br /> Driver Registration
-            </h1>
-            {isDriver === "false" || isDriver === "" ? (
-                <p className="driver-alert">Please Skip this step</p>
-            ) : (
-                ""
-            )}
             <div className="driver_register_fields">
                 <TextField
                     required

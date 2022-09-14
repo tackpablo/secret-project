@@ -1,0 +1,5 @@
+.car_register_fields {
+    display: flex;
+    justify-content: center;
+    padding-top: 1em;
+}

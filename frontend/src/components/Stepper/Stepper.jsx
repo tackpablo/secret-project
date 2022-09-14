@@ -7,6 +7,7 @@ import StepLabel from "@mui/material/StepLabel";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import UserRegisterPage from "../RegisterPage/UserRegisterPage";
+import CarRegisterPage from "../RegisterPage/CarRegisterPage";
 import DriverRegisterPage from "../RegisterPage/DriverRegisterPage";
 import CodeVerificationPage from "../CodeVerificationPage/CodeVerificationPage";
 import { authContext } from "../../Providers/AuthProvider";
@@ -46,6 +47,15 @@ export default function HorizontalLinearStepper() {
     const [driverRegisterValues, setDriverRegisterValues] = React.useState(
         defaultDriverRegisterObj
     );
+
+    const defaultCarObj = {
+        brand: "",
+        model: "",
+        type: "",
+    };
+
+    const [carRegisterValues, setCarRegisterValues] =
+        React.useState(defaultCarObj);
 
     const handleStep = (step) => () => {
         setActiveStep(step);
@@ -109,12 +119,30 @@ export default function HorizontalLinearStepper() {
         {
             name: "Register as driver",
             component: (
-                <DriverRegisterPage
-                    isDriver={isDriver}
-                    userRegisterValues={userRegisterValues}
-                    driverRegisterValues={driverRegisterValues}
-                    setDriverRegisterValues={setDriverRegisterValues}
-                />
+                <>
+                    <h1 className="new">Driver/Car Registration</h1>
+                    {isDriver === "false" || isDriver === "" ? (
+                        <p className="driver-alert">Please Skip this step</p>
+                    ) : (
+                        ""
+                    )}
+                    <div className="driver-reg">
+                        <div>
+                            <DriverRegisterPage
+                                driverRegisterValues={driverRegisterValues}
+                                setDriverRegisterValues={
+                                    setDriverRegisterValues
+                                }
+                            />
+                        </div>
+                        <div>
+                            <CarRegisterPage
+                                carRegisterValues={carRegisterValues}
+                                setCarRegisterValues={setCarRegisterValues}
+                            />
+                        </div>
+                    </div>
+                </>
             ),
         },
         { name: "Code Verification", component: <CodeVerificationPage /> },
@@ -127,7 +155,7 @@ export default function HorizontalLinearStepper() {
                     {steps.map((label, index) => {
                         const stepProps = {};
                         const labelProps = {};
-                        if (isStepOptional(index)) {
+                        if (isStepOptional(1, 2)) {
                             labelProps.optional = (
                                 <Typography variant="caption">
                                     Optional
@@ -199,22 +227,23 @@ export default function HorizontalLinearStepper() {
                                 )}
 
                             <Button onClick={handleNext}>
-                                {activeStep === steps.length - 1
-                                    ? "Finish"
-                                    : // <Button
-                                      //     role="link"
-                                      //     variant="outlined"
-                                      //     onClick={() => {
-                                      //         registerHandler(
-                                      //             userRegisterValues,
-                                      //             driverRegisterValues
-                                      //         );
-                                      //         navigate("/call");
-                                      //     }}
-                                      // >
-                                      //     Register
-                                      // </Button>
-                                      "Next"}
+                                {activeStep === steps.length - 1 ? (
+                                    <Button
+                                        role="link"
+                                        variant="outlined"
+                                        onClick={() => {
+                                            registerHandler(
+                                                userRegisterValues,
+                                                driverRegisterValues
+                                            );
+                                            navigate("/call");
+                                        }}
+                                    >
+                                        Register
+                                    </Button>
+                                ) : (
+                                    "Next"
+                                )}
                             </Button>
                         </Box>
                     </React.Fragment>
