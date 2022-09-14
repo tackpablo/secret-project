@@ -8,3 +8,21 @@
     justify-content: center;
     padding-top: 1em;
 }
+
+.driver-reg {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.driver-alert {
+    display: flex;
+    color: red;
+    font-size: medium;
+    justify-content: center;
+}
+
+.new {
+    display: flex;
+    justify-content: center;
+}
