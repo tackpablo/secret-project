@@ -4,23 +4,16 @@ export const authContext = createContext();
 
 export default function AuthProvider(props) {
     // Register user
-    const registerHandler = async (
-        userRegisterValues,
-        driverRegisterValues
-    ) => {
+    const registerHandler = async (registerValues) => {
         try {
             const url = `http://localhost:8080/register`;
-            const registerData = Object.assign(
-                ...[userRegisterValues, driverRegisterValues]
-            );
-            console.log("LOGINVALUES: ", registerData);
-
+            console.log("REGISTERVALUES: ", registerValues);
             const response = await fetch(url, {
                 method: "POST",
                 headers: {
                     "Content-type": "application/json",
                 },
-                body: JSON.stringify(registerData),
+                body: JSON.stringify(registerValues),
             });
 
             const data = await response.json();
