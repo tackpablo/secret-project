@@ -115,9 +115,41 @@ export default function HorizontalLinearStepper() {
                     setUserRegisterValues={setUserRegisterValues}
                 />
             ),
+            button: (
+                <Button
+                    role="link"
+                    variant="outlined"
+                    onClick={() => {
+                        registerHandler(
+                            userRegisterValues,
+                            driverRegisterValues
+                        );
+                        navigate("/call");
+                    }}
+                >
+                    Register
+                </Button>
+            ),
         },
         {
-            name: "Register as driver",
+            name: "Register your car",
+            component: (
+                <>
+                    <h1 className="new">Driver and Car Registration</h1>
+
+                    <div className="driver-reg">
+                        <div>
+                            <CarRegisterPage
+                                carRegisterValues={carRegisterValues}
+                                setCarRegisterValues={setCarRegisterValues}
+                            />
+                        </div>
+                    </div>
+                </>
+            ),
+        },
+        {
+            name: "Register as a driver",
             component: (
                 <>
                     <h1 className="new">Driver and Car Registration</h1>
@@ -133,12 +165,6 @@ export default function HorizontalLinearStepper() {
                                 setDriverRegisterValues={
                                     setDriverRegisterValues
                                 }
-                            />
-                        </div>
-                        <div>
-                            <CarRegisterPage
-                                carRegisterValues={carRegisterValues}
-                                setCarRegisterValues={setCarRegisterValues}
                             />
                         </div>
                     </div>
@@ -227,23 +253,9 @@ export default function HorizontalLinearStepper() {
                                 )}
 
                             <Button onClick={handleNext}>
-                                {activeStep === steps.length - 1 ? (
-                                    <Button
-                                        role="link"
-                                        variant="outlined"
-                                        onClick={() => {
-                                            registerHandler(
-                                                userRegisterValues,
-                                                driverRegisterValues
-                                            );
-                                            navigate("/call");
-                                        }}
-                                    >
-                                        Register
-                                    </Button>
-                                ) : (
-                                    "Next"
-                                )}
+                                {activeStep === steps.length - 1
+                                    ? "Finish"
+                                    : "Next"}
                             </Button>
                         </Box>
                     </React.Fragment>
