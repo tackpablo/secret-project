@@ -17,7 +17,7 @@ export default function HorizontalLinearStepper() {
     const [activeStep, setActiveStep] = React.useState(0);
     const [skipped, setSkipped] = React.useState(new Set());
     const [isDriver, setIsDriver] = React.useState("");
-    const { userRegisterHandler } = React.useContext(authContext);
+    const { registerHandler } = React.useContext(authContext);
     const navigate = useNavigate();
 
     const defaultUserRegisterObj = {
@@ -121,7 +121,7 @@ export default function HorizontalLinearStepper() {
                     role="link"
                     variant="outlined"
                     onClick={() => {
-                        userRegisterHandler(
+                        registerHandler(
                             userRegisterValues,
                             driverRegisterValues
                         );
